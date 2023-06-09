@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>DESTINY 2 MACROS</title>
+    <link rel="stylesheet" href="mainStyles.css" />
+  </head>
+  <body>
+    <header>
+      <span class="title-bar" onmousedown="neutron.DragTitleBar()"
+        >DESTINY 2 MACROS</span
+      >
+      <span class="title-btn" onclick="neutron.Minimize()">0</span>
+      <span class="title-btn title-btn-close" onclick="neutron.Close()">r</span>
+    </header>
+    <div class="content">
+      <h2>Настройки управления</h2>
+      <div class="settings">
+        <label for="ultButton">Суперспособность</label>
+        <input type="text" id="ultButton" />
+        <label for="interactButton">Взаимодействие</label>
+        <input type="text" id="interactButton" />
+        <label for="jumpButton">Прыжок</label>
+        <input type="text" id="jumpButton" />
+      </div>
+      <button class="saveSettings" onclick="ahk.Clicked(event)">
+        Сохранить
+      </button>
+    </div>
+    <script src="mainScripts.js"></script>
+  </body>
+</html>
