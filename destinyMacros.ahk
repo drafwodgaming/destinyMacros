@@ -7,9 +7,12 @@ SetWorkingDir %A_ScriptDir%
 CoordMode, Pixel, Screen
 SetBatchLines -1
 
+appdata = %A_AppData%
+
 global ultButton, interactButton, jumpButton
 global buttons := ["ultButton", "interactButton", "jumpButton"]
-global configPath := "Config/config.ini"
+global folderPath := appdata . "\DestinyMacros"
+global configPath := folderPath . "\config.ini"
 global section := "Section"
 
 LoadConfigValues()
@@ -24,15 +27,17 @@ FileInstall, Main/main.html, Main/main.html
 FileInstall, Main/mainStyles.css, Main/mainStyles.css
 ; =================================================================
 
-NeutronClose:
 GuiClose:
 ExitApp
 
 Clicked(neutron, event)
 {
+    if (!FileExist(folderPath))
+        FileCreateDir, % folderPath
     ultButton := neutron.doc.getElementById("ultButton").value
     interactButton := neutron.doc.getElementById("interactButton").value
     jumpButton := neutron.doc.getElementById("jumpButton").value
+
     SaveConfig()
 }
 
@@ -43,6 +48,7 @@ SaveConfig()
 
     MsgBox, Значения переменных сохранены в файле и обновлены.
 }
+
 LoadConfigValues()
 {
     for index, button in buttons

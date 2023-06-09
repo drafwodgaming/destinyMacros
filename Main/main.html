@@ -16,15 +16,15 @@
       <h2>Настройки управления</h2>
       <div class="settings">
         <label for="ultButton">Суперспособность</label>
-        <input type="text" id="ultButton" />
+        <input type="text" id="ultButton" readonly />
         <label for="interactButton">Взаимодействие</label>
-        <input type="text" id="interactButton" />
+        <input type="text" id="interactButton" readonly />
         <label for="jumpButton">Прыжок</label>
-        <input type="text" id="jumpButton" />
+        <input type="text" id="jumpButton" readonly />
+        <button class="saveSettings" onclick="ahk.Clicked(event)">
+          Сохранить
+        </button>
       </div>
-      <button class="saveSettings" onclick="ahk.Clicked(event)">
-        Сохранить
-      </button>
     </div>
     <script src="mainScripts.js"></script>
   </body>

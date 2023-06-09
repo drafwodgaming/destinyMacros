@@ -13,6 +13,11 @@ html, body {
       cursor: default;
     }
 
+    .light-theme {
+      background-color: #ffffff; /* Цвет фона в светлой теме */
+      color: #000000; /* Цвет текста в светлой теме */
+    }
+
 header {
       width: 100%;
       display: flex;
@@ -53,6 +58,14 @@ input[type="text"] {
   background-color: #0c0c0c;
   color: white;
 }
+
+.input-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  display: none;
+}
+
 input[type="text"]:focus {
   outline: none;
 }
@@ -86,10 +99,6 @@ input[type="text"]:focus {
 }
 
 .saveSettings {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: inline-block;
   padding: 2px 5px;
   font-size: 16px;
