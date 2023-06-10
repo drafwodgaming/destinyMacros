@@ -1,5 +1,6 @@
 ﻿TrayMenu()
 #Include Neutron.ahk
+#Include Jxon.ahk
 #Persistent
 #SingleInstance, Force
 #NoEnv
@@ -7,7 +8,7 @@ SendMode Input
 SetWorkingDir %A_ScriptDir%
 CoordMode, Pixel, Screen
 SetBatchLines -1
-SetTimer, CheckAndNotifyNewRelease, 10000
+SetTimer, CheckGitHubUpdates, 10000 ; Проверять обновления каждую минуту (60000 миллисекунд)
 
 appdata = %A_AppData%
 
@@ -90,51 +91,35 @@ OpenLink:
     Run, https://github.com/drafwodgaming/destinyMacros/releases
 return
 
-; Установите значения владельца репозитория и имя репозитория
-owner := "drafwodgaming"
-repo := "destinyMacros"
+CheckGitHubUpdates:
+    repoOwner := "drafwodgaming" ; Вставьте имя владельца репозитория
+    repoName := "destinyMacros" ; Вставьте имя репозитория
 
-; Текущая версия вашего приложения
-currentVersion := "0.5"
+    ; Отправить запрос к GitHub API для получения информации о последнем релизе
+    url := "https://api.github.com/repos/" . repoOwner . "/" . repoName . "/releases/latest"
+    response := GetWebContent(url)
+    release := JSON.Parse(response)
 
-; Функция для проверки наличия нового релиза
-CheckForNewRelease() {
-    url := "https://api.github.com/repos/" owner "/" repo "/releases/latest"
-    headers := { "Accept": "application/vnd.github.v3+json" }
-    response := ""
-    result := ""
+    ; Проверить версию последнего релиза
+    latestVersion := release.tag_name
 
+    ; Вставьте вашу текущую версию релиза здесь
+    currentVersion := "0.0.5"
+
+    ; Сравнить текущую версию с последней версией
+    if (currentVersion < latestVersion)
+    {
+        MsgBox, Обновление доступно! Пожалуйста, скачайте новый релиз.
+    }
+return
+
+; Функция для получения содержимого веб-страницы
+GetWebContent(url)
+{
     WinHttp := ComObjCreate("WinHttp.WinHttpRequest.5.1")
     WinHttp.Open("GET", url)
-    WinHttp.SetRequestHeader("User-Agent", "AutoHotkey")
+    WinHttp.Send()
+    WinHttp.WaitForResponse()
 
-    try {
-        WinHttp.Send()
-        response := WinHttp.ResponseText
-    } catch {
-        MsgBox, Произошла ошибка при получении данных о релизе!
-        return
-    }
-
-    if (WinHttp.Status() == 200) {
-        Json := ComObjCreate("Json")
-        result := Json.Load(response)
-    }
-
-return result
+return WinHttp.ResponseText
 }
-
-; Функция для проверки наличия нового релиза и вывода уведомления
-CheckAndNotifyNewRelease() {
-    latestRelease := CheckForNewRelease()
-
-    if (latestRelease != "") {
-        latestVersion := latestRelease.tag_name
-
-        if (latestVersion > currentVersion) {
-            ; Выведите уведомление или выполните действия для обновления приложения
-            MsgBox, Новый релиз %latestVersion% доступен! Пожалуйста, скачайте его.
-        }
-    }
-}
-return
