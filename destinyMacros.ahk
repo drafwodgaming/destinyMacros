@@ -8,7 +8,7 @@ SendMode Input
 SetWorkingDir %A_ScriptDir%
 CoordMode, Pixel, Screen
 SetBatchLines -1
-SetTimer, CheckGitHubUpdates, 10000
+CheckGitHubUpdates()
 
 appdata = %A_AppData%
 
@@ -91,7 +91,8 @@ OpenLink:
     Run, https://github.com/drafwodgaming/destinyMacros/releases
 return
 
-CheckGitHubUpdates:
+CheckGitHubUpdates()
+{
     ; Отправить запрос к GitHub API для получения информации о последнем релизе
     url := "https://api.github.com/repos/drafwodgaming/destinyMacros/releases/latest"
     response := GetWebContent(url)
@@ -104,9 +105,15 @@ CheckGitHubUpdates:
     ; Сравнить текущую версию с последней версией
     if (currentVersion < latestVersion)
     {
-        MsgBox, Обновление доступно! Пожалуйста, скачайте новый релиз. %latestVersion%
+        MsgBox, 4,, Обновление доступно! Хотие посмотреть?
+        IfMsgBox Yes
+        {
+            Run, % release.html_url
+            ExitApp
+        }
     }
 return
+}
 
 ; Функция для получения содержимого веб-страницы
 GetWebContent(url)
