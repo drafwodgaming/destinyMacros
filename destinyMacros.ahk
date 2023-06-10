@@ -8,7 +8,7 @@ SendMode Input
 SetWorkingDir %A_ScriptDir%
 CoordMode, Pixel, Screen
 SetBatchLines -1
-SetTimer, CheckGitHubUpdates, 10000 ; Проверять обновления каждую минуту (60000 миллисекунд)
+SetTimer, CheckGitHubUpdates, 10000
 
 appdata = %A_AppData%
 
@@ -95,18 +95,16 @@ CheckGitHubUpdates:
     ; Отправить запрос к GitHub API для получения информации о последнем релизе
     url := "https://api.github.com/repos/drafwodgaming/destinyMacros/releases/latest"
     response := GetWebContent(url)
-    release := JSON.Parse(response)
+    release := JSON.Load(response)
 
-    ; Проверить версию последнего релиза
     latestVersion := release.tag_name
 
     ; Вставьте вашу текущую версию релиза здесь
     currentVersion := "0.0.6"
-
     ; Сравнить текущую версию с последней версией
     if (currentVersion < latestVersion)
     {
-        MsgBox, Обновление доступно! Пожалуйста, скачайте новый релиз.
+        MsgBox, Обновление доступно! Пожалуйста, скачайте новый релиз. %latestVersion%
     }
 return
 
