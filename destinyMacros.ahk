@@ -95,7 +95,7 @@ CheckGitHubUpdates:
     ; Отправить запрос к GitHub API для получения информации о последнем релизе
     url := "https://api.github.com/repos/drafwodgaming/destinyMacros/releases/latest"
     response := GetWebContent(url)
-    release := JSON.Parse(response)
+    release := JSON.Load(response)
 
     ; Проверить версию последнего релиза
     latestVersion := release.tag_name
@@ -107,10 +107,6 @@ CheckGitHubUpdates:
     if (currentVersion < latestVersion)
     {
         MsgBox, Обновление доступно! Пожалуйста, скачайте новый релиз.
-    }
-    else 
-    {
-        MsgBox, НИХУЯ
     }
 return
 
