@@ -1,6 +1,6 @@
 ﻿TrayMenu()
-#Include Neutron.ahk
-#Include JSON.ahk
+#Include Libraries\Neutron.ahk
+#Include Libraries\JSON.ahk
 #Persistent
 #SingleInstance, Force
 #NoEnv
