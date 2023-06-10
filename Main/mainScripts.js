@@ -1,17 +1,8 @@
-document.addEventListener("DOMContentLoaded", function () {
-  var textElement = document.querySelector(".title-bar");
-
-  textElement.addEventListener("click", function () {
-    textElement.classList.add("animated");
-  });
-});
-
 const buttonContainers = {
   ult: document.getElementById("ultButton"),
   interact: document.getElementById("interactButton"),
   jump: document.getElementById("jumpButton"),
 };
-
 const russianToEnglishMap = {
   й: "Q",
   ц: "W",
@@ -37,7 +28,6 @@ const russianToEnglishMap = {
   ж: ";",
   э: "'",
   ё: "`",
-  ё: "`",
   я: "Z",
   ч: "X",
   с: "C",
@@ -50,6 +40,9 @@ const russianToEnglishMap = {
 };
 
 let activeKeyContainer = null;
+
+document.addEventListener("keydown", handleKeydown);
+document.addEventListener("keypress", handleKeydown);
 
 // Функция для обновления текста в ячейке
 function updateKeyText(keyContainer, key) {
@@ -77,9 +70,6 @@ function handleKeydown(event) {
     updateKeyText(activeKeyContainer, transformedKey);
   }
 }
-
-document.addEventListener("keydown", handleKeydown);
-document.addEventListener("keypress", handleKeydown);
 
 // Обработка клика на область для каждой ячейки
 for (let containerKey in buttonContainers) {

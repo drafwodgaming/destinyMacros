@@ -6,21 +6,28 @@
   </head>
   <body>
     <header>
-      <span class="title-bar" onmousedown="neutron.DragTitleBar()"
-        >DESTINY 2 MACROS</span
-      >
-      <span class="title-btn" onclick="neutron.Minimize()">0</span>
-      <span class="title-btn title-btn-close" onclick="neutron.Close()">r</span>
+      <div class="header-info-label">
+        <img src="Assets/icon.png" class="app-icon" />
+        <span class="title-bar" onmousedown="neutron.DragTitleBar()"
+          >DESTINY 2 MACROS</span
+        >
+      </div>
+      <div class="header-buttons">
+        <span class="title-btn" onclick="neutron.Minimize()">0</span>
+        <span class="title-btn title-btn-close" onclick="neutron.Close()"
+          >r</span
+        >
+      </div>
     </header>
     <div class="content">
       <h2>Настройки управления</h2>
       <div class="settings">
-        <label for="ultButton">Суперспособность</label>
-        <input type="text" id="ultButton" readonly />
-        <label for="interactButton">Взаимодействие</label>
-        <input type="text" id="interactButton" readonly />
-        <label for="jumpButton">Прыжок</label>
-        <input type="text" id="jumpButton" readonly />
+        <label>Суперспособность</label>
+        <input type="text" id="ultButton" tabindex="-1" readonly />
+        <label>Взаимодействие</label>
+        <input type="text" id="interactButton" tabindex="-1" readonly />
+        <label>Прыжок</label>
+        <input type="text" id="jumpButton" tabindex="-1" readonly />
         <button class="saveSettings" onclick="ahk.Clicked(event)">
           Сохранить
         </button>

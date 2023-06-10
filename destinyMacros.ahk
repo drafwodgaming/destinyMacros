@@ -1,4 +1,5 @@
-﻿#Include Neutron.ahk
+﻿TrayMenu()
+#Include Neutron.ahk
 #Persistent
 #SingleInstance, Force
 #NoEnv
@@ -6,6 +7,7 @@ SendMode Input
 SetWorkingDir %A_ScriptDir%
 CoordMode, Pixel, Screen
 SetBatchLines -1
+SetTimer, CheckGitHubRelease, 600000
 
 appdata = %A_AppData%
 
@@ -53,12 +55,13 @@ LoadConfigValues()
 {
     for index, button in buttons
         IniRead, %button%, %configPath%, %section%, %button%
-}
 
+}
+#IfWinActive ahk_exe destiny2.exe
 WarlockSkating:
 F3::
     SendInput, {3 down}{3 up}
-    Sleep, 750
+    Sleep, 600
     SendInput, {RButton down}{RButton up}
     Sleep, 50
     SendInput, {%jumpButton% down}
@@ -69,6 +72,47 @@ F3::
     Sleep, 50
     SendInput, {%ultButton% up}
 return
+#If
 
 F5::Reload
 F6::ExitApp
+
+TrayMenu()
+{
+    Menu, Tray, NoStandard
+    Menu, Tray, Tip, DESTINY 2 MACROS ; Установка всплывающей подсказки
+    Menu, Tray, Icon, Main\Assets\icon.png 
+    Menu, Tray, Add, GitHub, OpenLink
+return
+}
+
+OpenLink:
+    Run, https://github.com/drafwodgaming/destinyMacros/releases
+return
+
+CheckGitHubRelease:
+    githubRepo := "drafwodgaming/destinyMacros" ; Замените на имя владельца и название репозитория
+    currentRelease := "0.6" ; Здесь хранится текущая версия, можете установить начальное значение
+
+    ; Получение информации о последнем релизе с GitHub API
+    url := "https://api.github.com/repos/" . githubRepo . "/releases/latest"
+    json := GetUrlData(url)
+    latestRelease := Json.ValueFromKey(json, "tag_name")
+
+    ; Сравнение текущей и последней версий
+    if (latestRelease != currentRelease)
+    {
+        ; Вывод уведомления
+        MsgBox, Новое обновление, скачайте
+        currentRelease := latestRelease
+    }
+return
+
+; Функция для получения данных по URL
+GetUrlData(url)
+{
+    WinHttp := ComObjCreate("WinHttp.WinHttpRequest.5.1")
+    WinHttp.Open("GET", url, false)
+    WinHttp.Send()
+return WinHttp.ResponseText
+}
