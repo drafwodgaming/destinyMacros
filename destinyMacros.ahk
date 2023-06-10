@@ -7,7 +7,7 @@ SendMode Input
 SetWorkingDir %A_ScriptDir%
 CoordMode, Pixel, Screen
 SetBatchLines -1
-SetTimer, CheckGitHubRelease, 600000
+SetTimer, CheckAndNotifyNewRelease, 10000
 
 appdata = %A_AppData%
 
@@ -90,29 +90,51 @@ OpenLink:
     Run, https://github.com/drafwodgaming/destinyMacros/releases
 return
 
-CheckGitHubRelease:
-    githubRepo := "drafwodgaming/destinyMacros" ; Замените на имя владельца и название репозитория
-    currentRelease := "0.6" ; Здесь хранится текущая версия, можете установить начальное значение
+; Установите значения владельца репозитория и имя репозитория
+owner := "drafwodgaming"
+repo := "destinyMacros"
 
-    ; Получение информации о последнем релизе с GitHub API
-    url := "https://api.github.com/repos/" . githubRepo . "/releases/latest"
-    json := GetUrlData(url)
-    latestRelease := Json.ValueFromKey(json, "tag_name")
+; Текущая версия вашего приложения
+currentVersion := "0.5"
 
-    ; Сравнение текущей и последней версий
-    if (latestRelease != currentRelease)
-    {
-        ; Вывод уведомления
-        MsgBox, Новое обновление, скачайте
-        currentRelease := latestRelease
-    }
-return
+; Функция для проверки наличия нового релиза
+CheckForNewRelease() {
+    url := "https://api.github.com/repos/" owner "/" repo "/releases/latest"
+    headers := { "Accept": "application/vnd.github.v3+json" }
+    response := ""
+    result := ""
 
-; Функция для получения данных по URL
-GetUrlData(url)
-{
     WinHttp := ComObjCreate("WinHttp.WinHttpRequest.5.1")
-    WinHttp.Open("GET", url, false)
-    WinHttp.Send()
-return WinHttp.ResponseText
+    WinHttp.Open("GET", url)
+    WinHttp.SetRequestHeader("User-Agent", "AutoHotkey")
+
+    try {
+        WinHttp.Send()
+        response := WinHttp.ResponseText
+    } catch {
+        MsgBox, Произошла ошибка при получении данных о релизе!
+        return
+    }
+
+    if (WinHttp.Status() == 200) {
+        Json := ComObjCreate("Json")
+        result := Json.Load(response)
+    }
+
+return result
 }
+
+; Функция для проверки наличия нового релиза и вывода уведомления
+CheckAndNotifyNewRelease() {
+    latestRelease := CheckForNewRelease()
+
+    if (latestRelease != "") {
+        latestVersion := latestRelease.tag_name
+
+        if (latestVersion > currentVersion) {
+            ; Выведите уведомление или выполните действия для обновления приложения
+            MsgBox, Новый релиз %latestVersion% доступен! Пожалуйста, скачайте его.
+        }
+    }
+}
+return
