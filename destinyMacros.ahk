@@ -92,11 +92,8 @@ OpenLink:
 return
 
 CheckGitHubUpdates:
-    repoOwner := "drafwodgaming" ; Вставьте имя владельца репозитория
-    repoName := "destinyMacros" ; Вставьте имя репозитория
-
     ; Отправить запрос к GitHub API для получения информации о последнем релизе
-    url := "https://api.github.com/repos/" . repoOwner . "/" . repoName . "/releases/latest"
+    url := "https://api.github.com/repos/drafwodgaming/destinyMacros/releases/latest"
     response := GetWebContent(url)
     release := JSON.Parse(response)
 
@@ -110,6 +107,10 @@ CheckGitHubUpdates:
     if (currentVersion < latestVersion)
     {
         MsgBox, Обновление доступно! Пожалуйста, скачайте новый релиз.
+    }
+    else 
+    {
+        MsgBox, НИХУЯ
     }
 return
 
