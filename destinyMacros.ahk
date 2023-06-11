@@ -113,7 +113,7 @@ CheckGitHubUpdates()
     ; Сравнить текущую версию с последней версией
     if (currentVersion < latestVersion)
     {
-        MsgBox, 4,, Обновление доступно! Хотие посмотреть?
+        MsgBox, 4, Новая версия, Обновление до %latestVersion% доступно! Хотие посмотреть?
         IfMsgBox Yes
         {
             Run, % release.html_url
@@ -122,7 +122,7 @@ CheckGitHubUpdates()
     } 
     else
     {
-        SetTimer, CheckGitHubUpdates, -3600000
+        SetTimer, CheckGitHubUpdates, 3600000
     }
 return
 }
