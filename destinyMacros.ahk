@@ -1,5 +1,4 @@
-﻿TrayMenu()
-#Include Libraries\Neutron.ahk
+﻿#Include Libraries\Neutron.ahk
 #Include Libraries\JSON.ahk
 #Persistent
 #SingleInstance, Force
@@ -12,40 +11,43 @@ CheckGitHubUpdates()
 
 appdata = %A_AppData%
 
-global ultButton, interactButton, jumpButton
-global buttons := ["ultButton", "interactButton", "jumpButton"]
-global folderPath := appdata . "\DestinyMacros"
-global configPath := folderPath . "\config.ini"
-global section := "Section"
+global ultButton, interactButton, jumpButton, neutron, folderPath, configPath, section, buttons
+folderPath := appdata . "\DestinyMacros"
+configPath := folderPath . "\config.ini"
+section := "Section"
+buttons := ["ultButton", "interactButton", "jumpButton"]
 
-LoadConfigValues()
+TrayMenu()
 neutron := new NeutronWindow()
 neutron.Load("Main/main.html")
-neutron.Gui("-Resize")
+neutron.Gui("-Resize +LastFound")
 neutron.Show()
+LoadConfigValues()
 return
 
 ; =================================================================
-FileInstall, Main/main.html, Main/main.html
-FileInstall, Main/mainStyles.css, Main/mainStyles.css
+FileInstall, Main/main.html, main.html
+FileInstall, Main/mainStyles.css, mainStyles.css
+FileInstall, Main/Assets/icon.png, icon.png
+FileInstall, Main/mainScripts.js, mainScripts.js
 ; =================================================================
 
 GuiClose:
+CloseApp:
 ExitApp
 
 Clicked(neutron, event)
 {
-    if (!FileExist(folderPath))
-        FileCreateDir, % folderPath
     ultButton := neutron.doc.getElementById("ultButton").value
     interactButton := neutron.doc.getElementById("interactButton").value
     jumpButton := neutron.doc.getElementById("jumpButton").value
-
     SaveConfig()
 }
 
 SaveConfig()
 {
+    if (!FileExist(folderPath))
+        FileCreateDir, % folderPath
     for index, button in buttons
         IniWrite, % %button%, %configPath%, %section%, %button%
 
@@ -55,9 +57,15 @@ SaveConfig()
 LoadConfigValues()
 {
     for index, button in buttons
+    { 
+        if (!FileExist(configPath))
+            return
         IniRead, %button%, %configPath%, %section%, %button%
+        neutron.doc.getElementById(button).value := %button%
 
+    }
 }
+
 #IfWinActive ahk_exe destiny2.exe
 WarlockSkating:
 F3::
@@ -82,8 +90,8 @@ TrayMenu()
 {
     Menu, Tray, NoStandard
     Menu, Tray, Tip, DESTINY 2 MACROS ; Установка всплывающей подсказки
-    Menu, Tray, Icon, Main\Assets\icon.png 
     Menu, Tray, Add, GitHub, OpenLink
+    Menu, Tray, Add, Выйти, CloseApp
 return
 }
 
@@ -101,7 +109,7 @@ CheckGitHubUpdates()
     latestVersion := release.tag_name
 
     ; Вставьте вашу текущую версию релиза здесь
-    currentVersion := "0.0.6"
+    currentVersion := "0.0.7"
     ; Сравнить текущую версию с последней версией
     if (currentVersion < latestVersion)
     {
@@ -111,6 +119,10 @@ CheckGitHubUpdates()
             Run, % release.html_url
             ExitApp
         }
+    } 
+    else
+    {
+        SetTimer, CheckGitHubUpdates, -3600000
     }
 return
 }

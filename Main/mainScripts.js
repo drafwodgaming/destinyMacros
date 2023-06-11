@@ -70,8 +70,6 @@ function handleKeydown(event) {
     updateKeyText(activeKeyContainer, transformedKey);
   }
 }
-
-// Обработка клика на область для каждой ячейки
 for (let containerKey in buttonContainers) {
   if (buttonContainers.hasOwnProperty(containerKey)) {
     const buttonContainer = buttonContainers[containerKey];

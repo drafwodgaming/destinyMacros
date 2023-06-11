@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Moirai+One&display=swap");
 
 html, body {
       width: 100%;
@@ -11,7 +11,8 @@ html, body {
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
-      cursor: default
+      cursor: default;
+      font-family: sans-serif;
 }
 
 .app-icon {
@@ -26,7 +27,7 @@ header {
 	justify-content: space-between;
   background: #000;
   color: #fff;
-  font-family: Segoe UI;
+  font-family: Moirai One;
   font-size: 9pt;
 }
 
@@ -137,7 +138,7 @@ input[type="text"]:not(:focus) {
   border-radius: 4px;
   transition: background-color 0.3s ease;
   cursor: pointer;
-    position: fixed;
+  position: fixed;
   bottom: 20px;
   right: 20px;
 }
