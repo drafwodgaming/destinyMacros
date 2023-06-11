@@ -101,30 +101,28 @@ return
 
 CheckGitHubUpdates()
 {
-    ; Отправить запрос к GitHub API для получения информации о последнем релизе
-    url := "https://api.github.com/repos/drafwodgaming/destinyMacros/releases/latest"
-    response := GetWebContent(url)
-    release := JSON.Load(response)
+    try {
+        ; Отправить запрос к GitHub API для получения информации о последнем релизе
+        url := "https://api.github.com/repos/drafwodgaming/destinyMacros/releases/latest"
+        response := GetWebContent(url)
+        release := JSON.Load(response)
 
-    latestVersion := release.tag_name
+        latestVersion := release.tag_name
 
-    ; Вставьте вашу текущую версию релиза здесь
-    currentVersion := "0.0.7"
-    ; Сравнить текущую версию с последней версией
-    if (currentVersion < latestVersion)
-    {
-        MsgBox, 4, Новая версия, Обновление до %latestVersion% доступно! Хотие посмотреть?
-        IfMsgBox Yes
+        ; Вставьте вашу текущую версию релиза здесь
+        currentVersion := "0.0.75"
+        ; Сравнить текущую версию с последней версией
+        if (currentVersion < latestVersion)
         {
-            Run, % release.html_url
-            ExitApp
-        }
-    } 
-    else
-    {
-        SetTimer, CheckGitHubUpdates, 3600000
+            MsgBox, 4, Новая версия, Обновление до %latestVersion% доступно! Хотие посмотреть?
+            IfMsgBox Yes
+            {
+                Run, % release.html_url
+                ExitApp
+            }
+        } 
     }
-return
+    SetTimer, CheckGitHubUpdates, 3600000
 }
 
 ; Функция для получения содержимого веб-страницы
