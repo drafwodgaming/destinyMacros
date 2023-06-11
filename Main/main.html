@@ -1,40 +1,60 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="ru">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>DESTINY 2 MACROS</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="mainStyles.css" />
   </head>
-  <body class="d-flex flex-column">
+  <body class="dark-theme">
     <header>
-      <div class="header-info-label">
-        <img src="Assets/icon.png" class="app-icon" />
-        <span class="title-bar" onmousedown="neutron.DragTitleBar()"
-          >DESTINY 2 MACROS</span
-        >
-      </div>
-      <div class="header-buttons">
-        <span class="title-btn" onclick="neutron.Minimize()">0</span>
-        <span class="title-btn title-btn-close" onclick="neutron.Close()"
-          >r</span
-        >
+      <div class="d-flex justify-content-between">
+        <div class="header-info-label d-flex align-items-center">
+          <img src="Assets/icon.png" class="app-icon" />
+          <span
+            class="title-bar flex-grow-1"
+            onmousedown="neutron.DragTitleBar()"
+            >DESTINY 2 MACROS</span
+          >
+        </div>
+        <div class="header-buttons d-inline-flex align-items-center">
+          <span class="title-btn" onclick="neutron.Minimize()">0</span>
+          <span class="title-btn title-btn-close" onclick="neutron.Close()"
+            >r</span
+          >
+        </div>
       </div>
     </header>
-    <div class="content">
-      <h2>Настройки управления</h2>
-      <div class="settings">
-        <label>Суперспособность</label>
-        <input type="text" id="ultButton" tabindex="-1" readonly />
-        <label>Взаимодействие</label>
-        <input type="text" id="interactButton" tabindex="-1" readonly />
-        <label>Прыжок</label>
-        <input type="text" id="jumpButton" tabindex="-1" readonly />
-        <button class="saveSettings" onclick="ahk.Clicked(event)">
-          Сохранить
-        </button>
-      </div>
+    <div class="container">
+      <section class="content">
+        <h2 class="text-center">Настройки управления</h2>
+        <div class="settings d-flex flex-column align-items-center">
+          <label>Суперспособность</label>
+          <input type="text" id="ultButton" tabindex="-1" readonly />
+          <label>Взаимодействие</label>
+          <input type="text" id="interactButton" tabindex="-1" readonly />
+          <label>Прыжок</label>
+          <input type="text" id="jumpButton" tabindex="-1" readonly />
+          <button
+            class="btn btn-primary saveSettings"
+            onclick="ahk.Clicked(event)"
+          >
+            Сохранить
+          </button>
+        </div>
+      </section>
     </div>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.js"
+      integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+      crossorigin="anonymous"
+    ></script>
     <script src="mainScripts.js"></script>
   </body>
 </html>

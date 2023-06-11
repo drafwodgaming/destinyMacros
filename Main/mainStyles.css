@@ -1,96 +1,102 @@
-@import url("https://fonts.googleapis.com/css2?family=Moirai+One&display=swap");
-
-html, body {
-      width: 100%;
-      height: 100%;
-      background-color: #000;
-      color: #fff ;
-      margin: 0;
-      padding: 0;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      cursor: default;
-      font-family: sans-serif;
+html,
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  cursor: default;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
+/* ************** Dark Theme ************** */
+.dark-theme {
+  background: #000;
+  color: #fff;
+}
+
+.dark-theme header {
+  background: #000;
+  color: #fff;
+}
+
+.dark-theme input[type="text"] {
+  background: #050505;
+  border-color: #383838;
+  color: #fff;
+}
+
+@keyframes darkControlAnimation {
+  0% {
+    background: #050505;
+  }
+  50% {
+    background: #222222;
+  }
+  100% {
+    background: #050505;
+  }
+}
+
+.dark-theme input[type="text"]::selection {
+  background: #8d8d8d; /* Цвет фона выделения */
+  color: #ffffff;
+}
+
+.dark-theme .title-bar:hover {
+  color: rgb(83, 83, 83);
+}
+
+.dark-theme .saveSettings {
+  background: #5f5f5f;
+  color: #fff;
+}
+
+.dark-theme .saveSettings:active {
+  background: #0f0f0f;
+}
+
+/* ************** Dark Theme ************** */
+
 .app-icon {
-    width:15px;
-    height:15px;
-    padding: 5px;
+  width: 22px;
+  height: 22px;
+  padding: 5px;
 }
 
 header {
   width: 100%;
-  display: flex;
-	justify-content: space-between;
-  background: #000;
-  color: #fff;
-  font-family: Moirai One;
   font-size: 9pt;
-}
-
-.header-info-label {
-	display: flex;
-	align-items: center;
-	width: 91%;
-}
-
-.header-buttons {
-	display: inline-flex;
-	align-items: center;
-}
-
-h2 {
-  text-align: center;
-}
-
-label {
-  height: 10%;
-  display: block;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.settings {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-@keyframes color-animation {
-  0% {
-    background-color: #2E2F32;
-  }
-  50% {
-    background-color: #727272;
-  }
-  100% {
-    background-color: #2E2F32;
-  }
-}
-
-input[type="text"] {
-  display: flex;
-  width: 20%;
-  max-width: 300px; 
-  padding: 5px;
-  border: none;
-  border-radius: 3px;
-  margin-bottom: 10px;
-  text-align: center;
-  background-color: #2E2F32 ;
-  color: white;
-  border-bottom: 2px solid transparent;
-  font-size: medium;
-  font-weight: 100;
   letter-spacing: 1px;
 }
 
+.header-info-label {
+  width: 91%;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+input[type="text"] {
+  width: 20%;
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: medium;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+
+input[type="text"]:hover {
+  cursor: default;
+}
+
 input[type="text"]:focus {
-  animation: color-animation 1.5s infinite;
+  animation: darkControlAnimation 1.5s infinite;
+  outline: none;
 }
 
 input[type="text"]:not(:focus) {
@@ -103,17 +109,11 @@ input[type="text"]:not(:focus) {
 }
 
 .title-bar {
-  flex-grow: 1;
   transition: color 0.5s ease;
-}
-
-.title-bar:hover{
-  color: rgb(83, 83, 83);
 }
 
 .title-btn {
   cursor: pointer;
-  vertical-align: bottom;
   font-family: Webdings;
   font-size: 11pt;
 }
@@ -127,13 +127,8 @@ input[type="text"]:not(:focus) {
 }
 
 .saveSettings {
-  background-color: gray;
   border: none;
-  color: #fff;
   padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
   font-size: 16px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
@@ -150,8 +145,4 @@ input[type="text"]:not(:focus) {
 .saveSettings:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
-}
-
-.saveSettings:active {
-  background-color: #000;
 }
