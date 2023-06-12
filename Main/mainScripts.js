@@ -51,7 +51,7 @@ $(document).ready(function () {
 
   /* Функция для обновления текста в ячейке */
   function updateKeyText(keyContainer, key) {
-    keyContainer.val(key.toUpperCase());
+    keyContainer.text(key.toUpperCase());
   }
 
   function transformKey(key, event) {
@@ -99,4 +99,8 @@ $(document).ready(function () {
       });
     }
   }
+
+  $(".theme-toggle").click(function () {
+    $("body").toggleClass("dark-theme light-theme");
+  });
 });

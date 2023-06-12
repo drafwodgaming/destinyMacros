@@ -11,7 +11,7 @@ CheckGitHubUpdates()
 
 appdata = %A_AppData%
 
-global ultButton, interactButton, jumpButton, neutron, folderPath, configPath, section, buttons
+global ultButton, interactButton, jumpButton, neutron, folderPath, configPath, section, buttons, themeClass
 folderPath := appdata . "\DestinyMacros"
 configPath := folderPath . "\config.ini"
 section := "Section"
@@ -28,8 +28,11 @@ return
 ; =================================================================
 FileInstall, Main/main.html, main.html
 FileInstall, Main/mainStyles.css, mainStyles.css
-FileInstall, Main/Assets/Themes/icon_dark-theme.png,icon_dark-theme.png
 FileInstall, Main/mainScripts.js, mainScripts.js
+FileInstall, Main/Assets/Themes/icon_dark-theme.png, icon_dark-theme.png
+FileInstall, Main/Assets/Themes/icon_light-theme.png, icon_light-theme.png
+FileInstall, Main/Assets/Themes/dark-theme.png, dark-theme.png
+FileInstall, Main/Assets/Themes/light-theme.png, light-theme.png
 ; =================================================================
 
 GuiClose:
@@ -38,9 +41,11 @@ ExitApp
 
 Clicked(neutron, event)
 {
-    ultButton := neutron.doc.getElementById("ultButton").value
-    interactButton := neutron.doc.getElementById("interactButton").value
-    jumpButton := neutron.doc.getElementById("jumpButton").value
+    themeClass := neutron.qs("body").className
+    ultButton := neutron.doc.getElementById("ultButton").innerText
+    interactButton := neutron.doc.getElementById("interactButton").innerText
+    jumpButton := neutron.doc.getElementById("jumpButton").innerText
+
     SaveConfig()
 }
 
@@ -49,7 +54,10 @@ SaveConfig()
     if (!FileExist(folderPath))
         FileCreateDir, % folderPath
     for index, button in buttons
-        IniWrite, % %button%, %configPath%, %section%, %button%
+        IniWrite, % %button%, % configPath, % section, % button
+
+    IniWrite, % themeClass, % configPath, % section, ThemeClass
+
     MsgBox, Значения переменных сохранены в файле и обновлены.
 }
 
@@ -60,8 +68,10 @@ LoadConfigValues()
     for index, button in buttons
     { 
         IniRead, %button%, %configPath%, %section%, %button%
-        neutron.doc.getElementById(button).value := %button%
+        neutron.doc.getElementById(button).innerText := %button%
     }
+    IniRead, themeClass, % configPath, % section, ThemeClass
+    neutron.qs("body").className := themeClass
 }
 
 #IfWinActive ahk_exe destiny2.exe
@@ -108,7 +118,7 @@ CheckGitHubUpdates()
         latestVersion := release.tag_name
 
         ; Вставьте вашу текущую версию релиза здесь
-        currentVersion := "0.0.75"
+        currentVersion := "0.0.8"
 
         ; Сравнить текущую версию с последней версией
         if (currentVersion < latestVersion)

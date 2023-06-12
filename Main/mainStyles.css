@@ -18,7 +18,7 @@ body {
   color: #fff;
 }
 
-.dark-theme input[type="text"] {
+.dark-theme .input-settings {
   background: #050505;
   border-color: #383838;
   color: #fff;
@@ -36,7 +36,7 @@ body {
   }
 }
 
-.dark-theme input[type="text"]::selection {
+.dark-theme .input-settings::selection {
   background: #8d8d8d; /* Цвет фона выделения */
   color: #ffffff;
 }
@@ -58,7 +58,78 @@ body {
   background-image: url(Assets/Themes/icon_dark-theme.png);
 }
 
+.dark-theme .input-settings:focus {
+  animation: darkControlAnimation 1.5s infinite;
+  outline: none;
+}
+
+.dark-theme .theme-toggle {
+  background-image: url(Assets/Themes/light-theme.png);
+}
+
 /* ************** Dark Theme ************** */
+
+/* ************** Light Theme ************** */
+.light-theme {
+  background: #fff;
+  color: #000;
+}
+
+.light-theme header {
+  background: #fff;
+  color: #000;
+}
+
+.light-theme .input-settings {
+  background: #f0f0f0;
+  border-color: #ccc;
+  color: #000;
+}
+
+@keyframes lightControlAnimation {
+  0% {
+    background: #f0f0f0;
+  }
+  50% {
+    background: #dbdbdb;
+  }
+  100% {
+    background: #f0f0f0;
+  }
+}
+
+.light-theme .input-settings::selection {
+  background: #337ab7;
+  color: #fff;
+}
+
+.light-theme .title-bar:hover {
+  color: rgb(150, 150, 150);
+}
+
+.light-theme .saveSettings {
+  background: #337ab7;
+  color: #fff;
+}
+
+.light-theme .saveSettings:active {
+  background: #0a5a9c;
+}
+
+.light-theme #appIcon {
+  background-image: url(Assets/Themes/icon_light-theme.png);
+}
+
+.light-theme .input-settings:focus {
+  animation: lightControlAnimation 1.5s infinite;
+  outline: none;
+}
+
+.light-theme .theme-toggle {
+  background-image: url(Assets/Themes/dark-theme.png);
+}
+
+/* ************** Light Theme ************** */
 
 .app-icon {
   display: inline-block;
@@ -86,8 +157,9 @@ label {
   letter-spacing: 0.5px;
 }
 
-input[type="text"] {
+.input-settings {
   width: 20%;
+  height: 30px;
   padding: 5px;
   border: 1px solid;
   border-radius: 3px;
@@ -98,16 +170,11 @@ input[type="text"] {
   font-weight: 400;
 }
 
-input[type="text"]:hover {
+.input-settings:hover {
   cursor: default;
 }
 
-input[type="text"]:focus {
-  animation: darkControlAnimation 1.5s infinite;
-  outline: none;
-}
-
-input[type="text"]:not(:focus) {
+.input-settings:not(:focus) {
   outline: none;
 }
 
@@ -153,4 +220,16 @@ input[type="text"]:not(:focus) {
 .saveSettings:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  margin-right: 5px;
+  background-size: cover;
 }

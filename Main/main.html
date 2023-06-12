@@ -23,6 +23,7 @@
             >DESTINY 2 MACROS</span
           >
         </div>
+        <button id="themeToggle" class="theme-toggle"></button>
         <div class="header-buttons d-inline-flex align-items-center">
           <span class="title-btn" onclick="neutron.Minimize()">0</span>
           <span class="title-btn title-btn-close" onclick="neutron.Close()"
@@ -36,11 +37,11 @@
         <h2 class="text-center">Настройки управления</h2>
         <div class="settings d-flex flex-column align-items-center">
           <label>Суперспособность</label>
-          <input type="text" id="ultButton" tabindex="-1" readonly />
+          <div class="input-settings" id="ultButton"></div>
           <label>Взаимодействие</label>
-          <input type="text" id="interactButton" tabindex="-1" readonly />
+          <div class="input-settings" id="interactButton"></div>
           <label>Прыжок</label>
-          <input type="text" id="jumpButton" tabindex="-1" readonly />
+          <div class="input-settings" id="jumpButton"></div>
           <button
             class="btn btn-primary saveSettings"
             onclick="ahk.Clicked(event)"
@@ -55,6 +56,8 @@
       integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
       crossorigin="anonymous"
     ></script>
+    <script src="bootstrap.min.js"></script>
+
     <script src="mainScripts.js"></script>
   </body>
 </html>
