@@ -82,7 +82,7 @@ body {
 
 .light-theme .input-settings {
   background: #f0f0f0;
-  border-color: #ccc;
+  border-color: #979797;
   color: #000;
 }
 
@@ -91,7 +91,7 @@ body {
     background: #f0f0f0;
   }
   50% {
-    background: #dbdbdb;
+    background: #bbbbbb;
   }
   100% {
     background: #f0f0f0;
