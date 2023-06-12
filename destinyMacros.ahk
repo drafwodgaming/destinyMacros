@@ -50,19 +50,17 @@ SaveConfig()
         FileCreateDir, % folderPath
     for index, button in buttons
         IniWrite, % %button%, %configPath%, %section%, %button%
-
     MsgBox, Значения переменных сохранены в файле и обновлены.
 }
 
 LoadConfigValues()
 {
+    if (!FileExist(configPath))
+        return
     for index, button in buttons
     { 
-        if (!FileExist(configPath))
-            return
         IniRead, %button%, %configPath%, %section%, %button%
         neutron.doc.getElementById(button).value := %button%
-
     }
 }
 
@@ -111,6 +109,7 @@ CheckGitHubUpdates()
 
         ; Вставьте вашу текущую версию релиза здесь
         currentVersion := "0.0.75"
+
         ; Сравнить текущую версию с последней версией
         if (currentVersion < latestVersion)
         {

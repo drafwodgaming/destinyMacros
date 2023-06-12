@@ -54,12 +54,20 @@ body {
   background: #0f0f0f;
 }
 
+.dark-theme #appIcon {
+  background-image: url(Assets/Themes/icon_dark-theme.png);
+}
+
 /* ************** Dark Theme ************** */
 
 .app-icon {
-  width: 22px;
-  height: 22px;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
   padding: 5px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-left: 5px;
 }
 
 header {
