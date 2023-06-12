@@ -28,7 +28,7 @@ return
 ; =================================================================
 FileInstall, Main/main.html, main.html
 FileInstall, Main/mainStyles.css, mainStyles.css
-FileInstall, Main/Assets/icon.png, icon.png
+FileInstall, Main/Assets/Themes/icon_dark-theme.png,icon_dark-theme.png
 FileInstall, Main/mainScripts.js, mainScripts.js
 ; =================================================================
 
