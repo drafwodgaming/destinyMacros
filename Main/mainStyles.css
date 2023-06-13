@@ -227,9 +227,9 @@ label {
   border: none;
   cursor: pointer;
   outline: none;
-  width: 20px;
-  height: 20px;
-  margin-top: 4px;
+  width: 18px;
+  height: 18px;
+  margin-top: 5px;
   margin-right: 5px;
   background-size: cover;
 }
