@@ -1,6 +1,7 @@
-html,
-body {
+* {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 0;
+  margin: 0;
   cursor: default;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -36,13 +37,8 @@ body {
   }
 }
 
-.dark-theme .input-settings::selection {
-  background: #8d8d8d; /* Цвет фона выделения */
-  color: #ffffff;
-}
-
 .dark-theme .title-bar:hover {
-  color: rgb(83, 83, 83);
+  color: #535353;
 }
 
 .dark-theme .saveSettings {
@@ -50,8 +46,12 @@ body {
   color: #fff;
 }
 
+.dark-theme .saveSettings:hover {
+  background-color: #474747;
+}
+
 .dark-theme .saveSettings:active {
-  background: #0f0f0f;
+  background: #242424;
 }
 
 .dark-theme #appIcon {
@@ -71,36 +71,31 @@ body {
 
 /* ************** Light Theme ************** */
 .light-theme {
-  background: #fff;
+  background: #e4e4e4;
   color: #000;
 }
 
 .light-theme header {
-  background: #fff;
+  background: #e4e4e4;
   color: #000;
 }
 
 .light-theme .input-settings {
-  background: #f0f0f0;
-  border-color: #979797;
+  background: #eeeeee;
+  border-color: #a5a5a5;
   color: #000;
 }
 
 @keyframes lightControlAnimation {
   0% {
-    background: #f0f0f0;
+    background: #eeeeee;
   }
   50% {
-    background: #bbbbbb;
+    background: #c2c2c2;
   }
   100% {
-    background: #f0f0f0;
+    background: #eeeeee;
   }
-}
-
-.light-theme .input-settings::selection {
-  background: #337ab7;
-  color: #fff;
 }
 
 .light-theme .title-bar:hover {
@@ -110,6 +105,10 @@ body {
 .light-theme .saveSettings {
   background: #337ab7;
   color: #fff;
+}
+
+.light-theme .saveSettings:hover {
+  background-color: #116cb8;
 }
 
 .light-theme .saveSettings:active {
@@ -206,24 +205,15 @@ label {
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 4px;
-  transition: background-color 0.3s ease;
   cursor: pointer;
   position: fixed;
   bottom: 20px;
   right: 20px;
 }
 
-.saveSettings:hover {
-  background-color: #474747;
-}
-
-.saveSettings:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
-}
-
 .theme-toggle {
   background-color: transparent;
+  position: relative;
   border: none;
   cursor: pointer;
   outline: none;
