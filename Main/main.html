@@ -12,52 +12,47 @@
     />
     <link rel="stylesheet" href="mainStyles.css" />
   </head>
+
   <body class="dark-theme">
     <header>
-      <div class="d-flex justify-content-between">
-        <div class="header-info-label d-flex align-items-center">
-          <span id="appIcon" class="app-icon"></span>
-          <span
-            class="title-bar flex-grow-1"
-            onmousedown="neutron.DragTitleBar()"
-            >DESTINY 2 MACROS</span
-          >
-        </div>
-        <button id="themeToggle" class="theme-toggle"></button>
-        <div class="header-buttons d-inline-flex align-items-center">
-          <span class="title-btn" onclick="neutron.Minimize()">0</span>
-          <span class="title-btn title-btn-close" onclick="neutron.Close()"
-            >r</span
-          >
-        </div>
+      <div class="header-info-label">
+        <span class="app-icon" id="appIcon"></span>
+        <span class="header-info-text" onmousedown="neutron.DragTitleBar()"
+          >DESTINY 2 MACROS</span
+        >
+      </div>
+
+      <div class="header-buttons">
+        <button class="toggle-theme-button" id="themeToggle"></button>
+        <span class="minimize-button" onclick="neutron.Minimize()">0</span>
+        <span class="close-button" onclick="neutron.Close()">r</span>
       </div>
     </header>
-    <div class="container">
-      <section class="content">
-        <h2 class="text-center">Настройки управления</h2>
-        <div class="settings d-flex flex-column align-items-center">
-          <label>Суперспособность</label>
-          <div class="input-settings" id="ultButton"></div>
-          <label>Взаимодействие</label>
-          <div class="input-settings" id="interactButton"></div>
-          <label>Прыжок</label>
-          <div class="input-settings" id="jumpButton"></div>
-          <button
-            class="btn btn-primary saveSettings"
-            onclick="ahk.Clicked(event)"
-          >
-            Сохранить
-          </button>
-        </div>
-      </section>
+
+    <div class="bind-keys-container">
+      <h2 class="bind-keys-info-label">Настройки управления</h2>
+
+      <div class="bind-keys-section">
+        <label class="settings-label">Суперспособность</label>
+        <div class="settings-key-input" id="ultButton"></div>
+        <label class="settings-label">Взаимодействие</label>
+        <div class="settings-key-input" id="interactButton"></div>
+        <label class="settings-label">Прыжок</label>
+        <div class="settings-key-input" id="jumpButton"></div>
+        <button
+          class="btn btn-primary saveSettings"
+          onclick="ahk.Clicked(event)"
+        >
+          Сохранить
+        </button>
+      </div>
     </div>
+
     <script
       src="https://code.jquery.com/jquery-3.7.0.js"
       integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
       crossorigin="anonymous"
     ></script>
-    <script src="bootstrap.min.js"></script>
-
     <script src="mainScripts.js"></script>
   </body>
 </html>

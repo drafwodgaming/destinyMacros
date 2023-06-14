@@ -19,7 +19,7 @@
   color: #fff;
 }
 
-.dark-theme .input-settings {
+.dark-theme .settings-key-input {
   background: #050505;
   border-color: #383838;
   color: #fff;
@@ -37,7 +37,7 @@
   }
 }
 
-.dark-theme .title-bar:hover {
+.dark-theme .header-info-text:hover {
   color: #535353;
 }
 
@@ -58,12 +58,12 @@
   background-image: url(Assets/Themes/icon_dark-theme.png);
 }
 
-.dark-theme .input-settings:focus {
+.dark-theme .settings-key-input:focus {
   animation: darkControlAnimation 1.5s infinite;
   outline: none;
 }
 
-.dark-theme .theme-toggle {
+.dark-theme .toggle-theme-button {
   background-image: url(Assets/Themes/light-theme.png);
 }
 
@@ -80,7 +80,7 @@
   color: #000;
 }
 
-.light-theme .input-settings {
+.light-theme .settings-key-input {
   background: #eeeeee;
   border-color: #a5a5a5;
   color: #000;
@@ -98,7 +98,7 @@
   }
 }
 
-.light-theme .title-bar:hover {
+.light-theme .header-info-text:hover {
   color: rgb(150, 150, 150);
 }
 
@@ -119,46 +119,96 @@
   background-image: url(Assets/Themes/icon_light-theme.png);
 }
 
-.light-theme .input-settings:focus {
+.light-theme .settings-key-input:focus {
   animation: lightControlAnimation 1.5s infinite;
   outline: none;
 }
 
-.light-theme .theme-toggle {
+.light-theme .toggle-theme-button {
   background-image: url(Assets/Themes/dark-theme.png);
 }
 
 /* ************** Light Theme ************** */
 
+header {
+  font-size: 9pt;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-info-label {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .app-icon {
-  display: inline-block;
   width: 15px;
   height: 15px;
-  padding: 5px;
   background-repeat: no-repeat;
   background-size: contain;
   margin-left: 5px;
 }
 
-header {
-  width: 100%;
-  font-size: 9pt;
+.header-info-text {
+  flex-grow: 1;
+  padding: 0.35em 0.5em;
   letter-spacing: 1px;
+  transition: color 0.5s ease;
 }
 
-.header-info-label {
-  width: 91%;
+.header-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-label {
-  display: block;
+.toggle-theme-button {
+  background-color: transparent;
+  border: none;
+  width: 18px;
+  height: 18px;
+  margin-right: 3px;
+  background-size: cover;
+}
+
+.close-button,
+.minimize-button {
+  cursor: pointer;
+  font-family: Webdings;
+  font-size: 11pt;
+  padding: 0.35em 0.5em;
+}
+
+.minimize-button:hover {
+  background: gray;
+}
+
+.close-button:hover {
+  background: #dc3545;
+}
+
+.bind-keys-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bind-keys-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.settings-label {
   margin-bottom: 10px;
   letter-spacing: 0.5px;
 }
 
-.input-settings {
-  width: 20%;
-  height: 30px;
+.settings-key-input {
+  width: 100%;
+  height: 36px;
   padding: 5px;
   border: 1px solid;
   border-radius: 3px;
@@ -167,37 +217,6 @@ label {
   font-size: medium;
   letter-spacing: 1px;
   font-weight: 400;
-}
-
-.input-settings:hover {
-  cursor: default;
-}
-
-.input-settings:not(:focus) {
-  outline: none;
-}
-
-.title-bar,
-.title-btn {
-  padding: 0.35em 0.5em;
-}
-
-.title-bar {
-  transition: color 0.5s ease;
-}
-
-.title-btn {
-  cursor: pointer;
-  font-family: Webdings;
-  font-size: 11pt;
-}
-
-.title-btn:hover {
-  background: gray;
-}
-
-.title-btn-close:hover {
-  background: #dc3545;
 }
 
 .saveSettings {
@@ -209,17 +228,4 @@ label {
   position: fixed;
   bottom: 20px;
   right: 20px;
-}
-
-.theme-toggle {
-  background-color: transparent;
-  position: relative;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  width: 18px;
-  height: 18px;
-  margin-top: 5px;
-  margin-right: 5px;
-  background-size: cover;
 }

@@ -100,7 +100,7 @@ $(document).ready(function () {
     }
   }
 
-  $(".theme-toggle").click(function () {
+  $(".toggle-theme-button").click(function () {
     $("body").toggleClass("dark-theme light-theme");
   });
 });
