@@ -66,11 +66,10 @@ LoadConfigValues()
 #HotIf WinActive("ahk_exe destiny2.exe") && (FileExist(configPath))
 
 WarlockSkating:
-    ultButton := IniRead(configPath, "Buttons", "ultButton")
-    jumpButton := IniRead(configPath, "Buttons", "jumpButton")
 F3::
     {
-
+        ultButton := IniRead(configPath, "Buttons", "ultButton")
+        jumpButton := IniRead(configPath, "Buttons", "jumpButton")
         SendInput("{3 down}{3 up}")
         Sleep(600)
         SendInput("{RButton down}{RButton up}")
