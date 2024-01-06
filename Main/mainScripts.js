@@ -101,6 +101,12 @@ $(document).ready(function () {
   }
 
   $(".toggle-theme-button").click(function () {
-    $("body").toggleClass("dark-theme light-theme");
+    if ($("body").hasClass("light-theme")) {
+      // Если текущая тема - светлая, переключаемся на темную
+      $("body").removeClass("light-theme").addClass("dark-theme");
+    } else {
+      // Если текущая тема - темная, переключаемся на светлую
+      $("body").removeClass("dark-theme").addClass("light-theme");
+    }
   });
 });

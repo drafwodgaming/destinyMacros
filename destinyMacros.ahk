@@ -6,9 +6,6 @@
 SendMode("Input")
 SetWorkingDir(A_ScriptDir)
 CoordMode("Pixel", "Screen")
-
-CheckGitHubUpdates()
-
 appdata := A_AppData
 folderPath := appdata . "\DestinyMacros"
 configPath := folderPath . "\config.ini"
@@ -16,12 +13,9 @@ buttons := ["ultButton", "interactButton", "jumpButton"]
 
 neutron := NeutronWindow().Load("Main/main.html")
 neutron.OnEvent("Close", (neutron) => ExitApp())
-
-TrayMenu()
+Autostart()
 neutron.Opt("-Resize")
 neutron.Show(,"destinyMacros")
-
-LoadConfigValues()
 
 if false {
 
@@ -44,7 +38,7 @@ SaveConfig()
 {
     if (!FileExist(folderPath))
         DirCreate(folderPath)
-    for index, button in buttons 
+    for button in buttons 
         IniWrite(neutron.doc.getElementById(button).innerText, configPath, "Buttons", button)
     IniWrite(neutron.qs("body").className, configPath, "General", "Theme")
 
@@ -55,16 +49,18 @@ SaveConfig()
 
 LoadConfigValues()
 {
-    if (FileExist(configPath))
+    try
     {
-        for index, button in buttons
-            neutron.doc.getElementById(button).innerText := IniRead(configPath, "Buttons", button)
-        neutron.qs("body").className := IniRead( configPath, "General", "Theme")
+        if (FileExist(configPath))
+        {
+            for button in buttons
+                neutron.doc.getElementById(button).innerText := IniRead(configPath, "Buttons", button)
+            neutron.qs("body").className := IniRead( configPath, "General", "Theme")
+        }
     }
 }
 
 #HotIf WinActive("ahk_exe destiny2.exe") && (FileExist(configPath))
-
 WarlockSkating:
 F3::
     {
@@ -83,7 +79,6 @@ F3::
         SendInput("{" . ultButton . " up}")
     } 
 return
-
 #HotIf
 
 F5::Reload()
@@ -147,4 +142,11 @@ GetWebContent(url)
     responseText := WinHttp.ResponseText
 
 return responseText
+}
+
+Autostart()
+{
+    CheckGitHubUpdates()
+    TrayMenu()
+    LoadConfigValues()
 }
